@@ -1,8 +1,5 @@
 # Hello, I'm Xadparo
 
-I'm web developer.  
-I love JS/TS, sadly love any type too  
-
 ## Usa?ble
 
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
