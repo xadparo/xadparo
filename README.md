@@ -1,6 +1,16 @@
 # Hello, I'm Xadparo
 
-## Usa?ble
+닉네임 Xadparo는 자드파로라고 읽습니다. 패러독스의 애너그램이에요.  
+1997년생 개발자이고, 주력포지션은 백엔드입니다.(react로 프론트도 할줄 알아요)  
+
+### Connect&Hire Info
+
+이메일: nate.xadparo@gmail.com  
+이력서: [이력서 링크](https://docs.google.com/document/d/13G8EYFHxSZhT2_6tom3m7gn49x3XTFMTUv19kyVuKKI/edit?usp=sharing)  
+
+# Usa?ble
+
+사용해보았던 기술, 도구, 방법의 나열입니다.
 
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
