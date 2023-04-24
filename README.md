@@ -6,7 +6,7 @@
 ### Connect&Hire Info
 
 이메일: nate.xadparo@gmail.com  
-이력서: [이력서 링크](https://docs.google.com/document/d/13G8EYFHxSZhT2_6tom3m7gn49x3XTFMTUv19kyVuKKI/edit?usp=sharing)  
+이력서: [이력서 링크](https://github.com/xadparo/xadparo/blob/main/doc/%EB%82%A8%EB%8F%99%ED%98%84-%EC%9D%B4%EB%A0%A5%EC%84%9C-20230424-after-coderecipe.pdf)  
 
 # Usa?ble
 
