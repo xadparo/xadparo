@@ -1,0 +1,141 @@
+<html>
+	<style>
+		.row {
+			display: flex;
+		}
+		.cell {
+			width: 60px;
+			height: 60px;
+			border: 2px solid #cccccc;
+			margin: 4px;
+			border-radius: 10%;
+			color: #FFFFFF;
+			font-size: 24px;
+			font-weight: bold;
+			text-align: center;
+			line-height: 60px;
+		}
+		.cell[data-value="2"] { background-color: #cdc1b4; }
+		.cell[data-value="4"] { background-color: #eee4da; }
+		.cell[data-value="8"] { background-color: #ede0c8; }
+		.cell[data-value="16"] { background-color: #f2b179; }
+		.cell[data-value="32"] { background-color: #f59563; }
+		.cell[data-value="64"] { background-color: #f67c5f; }
+		.cell[data-value="128"] { background-color: #f65e3b; }
+		.cell[data-value="256"] { background-color: #edcf72; }
+		.cell[data-value="512"] { background-color: #edcc61; }
+		.cell[data-value="1024"] { background-color: #edc53f; }
+		.cell[data-value="2048"] { background-color: #cfaa30; }
+	</style>
+	<body>
+		<div>prototype</div>
+		<div id="board"></div>
+		<div>
+			<span>LK: </span>
+			<span id='lk''></span>
+		</div>
+	</body>
+	<script>
+		let boardDom = document.getElementById('board')
+		let size = 6
+		let board = []
+		let directionMapByArrowKey = {
+			'ArrowUp': [-1, 0],
+			'ArrowDown': [1, 0],
+			'ArrowLeft': [0, -1],
+			'ArrowRight': [0, 1]
+		}
+
+		function setBoard(arg = {}) {
+			size = arg.size
+			board = new Array(size).fill(0).map(() => new Array(size).fill(0))
+			boardDom.innerHTML = new Array(size).fill(0).map((_, i) => {
+				return `<div class="row">${new Array(size).fill(0).map((_, j) => {
+					return `<div class="cell" data-index="${i * size + j}"></div>`
+				}).join('')}</div>`
+			}).join('')
+		}
+		function drawBoard(arg) {
+			board.forEach((row, i) => {
+				row.forEach((cell, j) => {
+					cell = document.querySelector(`.cell[data-index="${i * size + j}"]`)
+					cell.innerText = board[i][j] === void 0? "": board[i][j]
+					cell.setAttribute('data-value', board[i][j] === void 0? "": board[i][j])
+				})
+			})
+		}
+		function move(direction) {
+			const [di, dj] = direction
+			const axis = di !== 0? 'y': 'x'
+			const factor = di || dj
+
+			for(let subAxisIndex = 0; subAxisIndex < size; subAxisIndex++) {
+				const axisArr = []
+				const newAxisArr = []
+				for(let axisIndex = 0; axisIndex < size; axisIndex++) {
+					const value = axis === 'x'? board[subAxisIndex][axisIndex]: board[axisIndex][subAxisIndex]
+					if(value !== 0) {
+						axisArr.push(value)
+					}
+				}
+
+				if(factor === 1) {
+					for(let i = 0; i < axisArr.length; i++) {
+						if(axisArr[i] === axisArr[i + 1]) {
+							newAxisArr.push(axisArr[i] * 2)
+							i++
+						} else {
+							newAxisArr.push(axisArr[i])
+						}
+					}
+				} else if(factor === -1) {
+					for(let i = axisArr.length - 1; i >= 0; i--) {
+						if(axisArr[i] === axisArr[i - 1]) {
+							newAxisArr.push(axisArr[i] * 2)
+							i--
+						} else {
+							newAxisArr.push(axisArr[i])
+						}
+					}
+				}
+
+				for(let axisIndex = 0; axisIndex < size; axisIndex++) {
+					const value = newAxisArr[factor === 1? size - 1 - axisIndex: axisIndex] || 0
+
+					if(axis === 'x') {
+						board[subAxisIndex][axisIndex] = value
+					} else {
+						board[axisIndex][subAxisIndex] = value
+					}
+				}
+			}
+		}
+		function gameStart() {
+			const generate = () => {
+				const voids = []
+				board.forEach((row, i) => {
+					row.forEach((cell, j) => {
+						if (cell === 0) voids.push([i, j])
+					})
+				})
+				const target = voids[Math.floor(Math.random() * voids.length)]
+				board[target[0]][target[1]] = Math.random() < 0.9? 2: 4
+			}
+			generate()
+			drawBoard()
+
+			document.getElementsByTagName("html")[0].addEventListener('keydown', (e) => {
+				lk.innerText = e.key
+				const direction = directionMapByArrowKey[e.key]
+				if(direction) {
+					move(direction)
+					generate()
+					drawBoard()
+				}
+			})
+		}
+
+		setBoard({ size })
+		gameStart() 
+	</script>
+</html>
